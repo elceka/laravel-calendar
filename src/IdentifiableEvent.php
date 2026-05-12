@@ -2,6 +2,11 @@
 
 namespace Acaronlex\LaravelCalendar;
 
+/**
+ * Interface IdentifiableEvent
+ *
+ * @package Acaronlex\LaravelCalendar
+ */
 interface IdentifiableEvent extends Event
 {
     /**
@@ -9,5 +14,5 @@ interface IdentifiableEvent extends Event
      *
      * @return int|string|null
      */
-    public function getId();
+    public function getId(): int|string|null;
 }

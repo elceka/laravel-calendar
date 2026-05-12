@@ -16,42 +16,44 @@ class SimpleEvent implements IdentifiableEvent
     /**
      * @var string|int|null
      */
-    public $id;
+    public string|int|null $id;
 
     /**
      * @var string
      */
-    public $title;
+    public string $title;
 
     /**
      * @var bool
      */
-    public $isAllDay;
+    public bool $isAllDay;
 
     /**
      * @var DateTime
      */
-    public $start;
+    public DateTime $start;
 
     /**
      * @var DateTime
      */
-    public $end;
+    public string|DateTime $end;
 
     /**
      * @var array
      */
-    private $options;
+    private array $options;
 
     /**
      * @param string          $title
      * @param bool            $isAllDay
-     * @param string|DateTime $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
-     * @param string|DateTime $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
+     * @param DateTime|string $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
+     * @param DateTime|string $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @param int|string|null $id
      * @param array           $options
+     *
+     * @throws \Exception
      */
-    public function __construct($title, $isAllDay, $start, $end, $id = null, $options = [])
+    public function __construct(string $title, bool $isAllDay, DateTime|string $start, DateTime|string $end, int|string $id = null, array $options = [])
     {
         $this->title    = $title;
         $this->isAllDay = $isAllDay;
@@ -66,7 +68,7 @@ class SimpleEvent implements IdentifiableEvent
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int|string|null
     {
         return $this->id;
     }
@@ -76,7 +78,7 @@ class SimpleEvent implements IdentifiableEvent
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -86,7 +88,7 @@ class SimpleEvent implements IdentifiableEvent
      *
      * @return bool
      */
-    public function isAllDay()
+    public function isAllDay(): bool
     {
         return $this->isAllDay;
     }
@@ -96,7 +98,7 @@ class SimpleEvent implements IdentifiableEvent
      *
      * @return DateTime
      */
-    public function getStart()
+    public function getStart(): DateTime
     {
         return $this->start;
     }
@@ -106,7 +108,7 @@ class SimpleEvent implements IdentifiableEvent
      *
      * @return DateTime
      */
-    public function getEnd()
+    public function getEnd(): DateTime
     {
         return $this->end;
     }
@@ -116,7 +118,7 @@ class SimpleEvent implements IdentifiableEvent
      *
      * @return array
      */
-    public function getEventOptions()
+    public function getEventOptions(): array
     {
         return $this->options;
     }

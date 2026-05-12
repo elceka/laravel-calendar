@@ -4,38 +4,44 @@ namespace Acaronlex\LaravelCalendar;
 
 use ArrayAccess;
 use DateTime;
-use Illuminate\View\Factory;
+use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\Str;
-use View;
+use Illuminate\View\Factory;
+use Illuminate\View\View;
 
+/**
+ * Class Calendar
+ *
+ * @package Acaronlex\LaravelCalendar
+ */
 class Calendar
 {
     /**
      * @var Factory
      */
-    protected $view;
+    protected Factory $view;
 
     /**
      * @var EventCollection
      */
-    protected $eventCollection;
+    protected EventCollection $eventCollection;
 
     /**
      * @var string
      */
-    protected $id;
+    protected string $id;
 
     /**
      * @var bool
      */
-    protected $es6 = false;
+    protected bool $es6 = false;
 
     /**
      * Default options array
      *
      * @var array
      */
-    protected $defaultOptions = [
+    protected array $defaultOptions = [
         'initialView' => 'dayGridMonth',
         'height' => 'auto',
         'headerToolbar' => [
@@ -51,18 +57,17 @@ class Calendar
      *
      * @var array
      */
-    protected $userOptions = [];
+    protected array $userOptions = [];
 
     /**
      * User defined callback options
      *
      * @var array
      */
-    protected $callbacks = [];
+    protected array $callbacks = [];
 
     /**
-     * @param Factory         $view
-     * @param EventCollection $eventCollection
+     *
      */
     public function __construct()
     {
@@ -74,13 +79,15 @@ class Calendar
      *
      * @param string          $title
      * @param string          $isAllDay
-     * @param string|DateTime $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
-     * @param string|DateTime $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
-     * @param string          $id    event Id
+     * @param DateTime|string $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
+     * @param DateTime|string $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
+     * @param string|null     $id    event Id
      * @param array           $options
+     *
      * @return SimpleEvent
+     * @throws \Exception
      */
-    public static function event($title, $isAllDay, $start, $end, $id = null, $options = [])
+    public static function event(string $title, string $isAllDay, DateTime|string $start, DateTime|string $end, string $id = null, array $options = []): SimpleEvent
     {
         return new SimpleEvent($title, $isAllDay, $start, $end, $id, $options);
     }
@@ -90,7 +97,7 @@ class Calendar
      *
      * @return string
      */
-    public function calendar()
+    public function calendar(): string
     {
         return '<div id="calendar-' . $this->getId() . '"></div>';
     }
@@ -100,11 +107,11 @@ class Calendar
      *
      * @return \Illuminate\View\View
      */
-    public function script()
+    public function script(): View
     {
         $options = $this->getOptionsJson();
 
-        return view($this->getEs6() ? 'laravel-calendar::script-es6' : 'laravel-calendar::script', [
+        return ViewFacade::make($this->getEs6() ? 'laravel-calendar::script-es6' : 'laravel-calendar::script', [
             'id' => $this->getId(),
             'options' => $options,
         ]);
@@ -114,9 +121,10 @@ class Calendar
      * Customize the ID of the generated <div>
      *
      * @param string $id
+     *
      * @return $this
      */
-    public function setId($id)
+    public function setId(string $id): static
     {
         $this->id = $id;
 
@@ -129,7 +137,7 @@ class Calendar
      *
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         if (! empty($this->id)) {
             return $this->id;
@@ -146,7 +154,7 @@ class Calendar
      * @param bool $value
      * @return $this
      */
-    public function setEs6(bool $value=true)
+    public function setEs6(bool $value=true): static
     {
         $this->es6 = $value;
 
@@ -158,7 +166,7 @@ class Calendar
      *
      * @return bool
      */
-    public function getEs6()
+    public function getEs6(): bool
     {
         return $this->es6;
     }
@@ -170,7 +178,7 @@ class Calendar
      * @param array $customAttributes
      * @return $this
      */
-    public function addEvent(Event $event, array $customAttributes = [])
+    public function addEvent(Event $event, array $customAttributes = []): static
     {
         $this->eventCollection->push($event, $customAttributes);
 
@@ -184,7 +192,7 @@ class Calendar
      * @param array $customAttributes
      * @return $this
      */
-    public function addEvents($events, array $customAttributes = [])
+    public function addEvents($events, array $customAttributes = []): static
     {
         foreach ($events as $event) {
             $this->eventCollection->push($event, $customAttributes);
@@ -199,7 +207,7 @@ class Calendar
      * @param array $options
      * @return $this
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): static
     {
         $this->userOptions = $options;
 
@@ -211,7 +219,7 @@ class Calendar
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return array_merge($this->defaultOptions, $this->userOptions);
     }
@@ -222,7 +230,7 @@ class Calendar
      * @param array $callbacks
      * @return $this
      */
-    public function setCallbacks(array $callbacks)
+    public function setCallbacks(array $callbacks): static
     {
         $this->callbacks = $callbacks;
 
@@ -234,7 +242,7 @@ class Calendar
      *
      * @return array
      */
-    public function getCallbacks()
+    public function getCallbacks(): array
     {
         return $this->callbacks;
     }
@@ -244,7 +252,7 @@ class Calendar
      *
      * @return string
      */
-    public function getOptionsJson()
+    public function getOptionsJson(): string
     {
         $options      = $this->getOptions();
         $placeholders = $this->getCallbackPlaceholders();
@@ -269,7 +277,7 @@ class Calendar
      *
      * @return array
      */
-    protected function getCallbackPlaceholders()
+    protected function getCallbackPlaceholders(): array
     {
         $callbacks    = $this->getCallbacks();
         $placeholders = [];
@@ -288,7 +296,7 @@ class Calendar
      * @param $placeholders
      * @return string
      */
-    protected function replaceCallbackPlaceholders($json, $placeholders)
+    protected function replaceCallbackPlaceholders($json, $placeholders): string
     {
         $search  = [];
         $replace = [];
@@ -307,7 +315,7 @@ class Calendar
      * @param $json
      * @return string
      */
-    protected function replaceKeys($json)
+    protected function replaceKeys($json): string
     {
         $search  = [];
         $replace = [];
