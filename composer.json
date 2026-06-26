@@ -1,31 +1,31 @@
 {
-    "name": "acaronlex/laravel-calendar",
+    "name": "elceka/laravel-calendar",
     "description": "Laravel helper for FullCalendar.io",
     "license": "MIT",
     "type": "package",
     "authors": [
         {
-            "name": "acaronlex",
-            "email": "acaronlex@outlook.com"
+            "name": "Radoslav Lukac",
+            "email": "dev@elceka.sk"
         }
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^11.0",
-        "illuminate/view": "^11.0"
+        "illuminate/support": "^12.0",
+        "illuminate/view": "^12.0"
     },
     "autoload": {
         "psr-4": {
-            "Acaronlex\\LaravelCalendar\\": "src"
+            "Elceka\\LaravelCalendar\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Acaronlex\\LaravelCalendar\\ServiceProvider"
+                "Elceka\\LaravelCalendar\\ServiceProvider"
             ],
             "aliases": {
-                "Calendar": "Acaronlex\\LaravelCalendar\\Facades\\Calendar"
+                "Calendar": "Elceka\\LaravelCalendar\\Facades\\Calendar"
             }
         }
     },
