@@ -1,11 +1,11 @@
 <?php
 
-namespace Acaronlex\LaravelCalendar;
+namespace Elceka\LaravelCalendar;
 
 /**
  * Interface IdentifiableEvent
  *
- * @package Acaronlex\LaravelCalendar
+ * @package Elceka\LaravelCalendar
  */
 interface IdentifiableEvent extends Event
 {

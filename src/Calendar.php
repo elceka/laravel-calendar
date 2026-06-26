@@ -1,6 +1,6 @@
 <?php
 
-namespace Acaronlex\LaravelCalendar;
+namespace Elceka\LaravelCalendar;
 
 use ArrayAccess;
 use DateTime;
@@ -12,7 +12,7 @@ use Illuminate\View\View;
 /**
  * Class Calendar
  *
- * @package Acaronlex\LaravelCalendar
+ * @package Elceka\LaravelCalendar
  */
 class Calendar
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Acaronlex\LaravelCalendar;
+namespace Elceka\LaravelCalendar;
 
 use DateTime;
 
 /**
  * Interface Event
  *
- * @package Acaronlex\LaravelCalendar
+ * @package Elceka\LaravelCalendar
  */
 interface Event
 {

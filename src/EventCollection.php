@@ -1,13 +1,13 @@
 <?php
 
-namespace Acaronlex\LaravelCalendar;
+namespace Elceka\LaravelCalendar;
 
 use Illuminate\Support\Collection;
 
 /**
  * Class EventCollection
  *
- * @package Acaronlex\LaravelCalendar
+ * @package Elceka\LaravelCalendar
  */
 class EventCollection
 {
@@ -25,7 +25,7 @@ class EventCollection
     }
 
     /**
-     * @param \Acaronlex\LaravelCalendar\Event $event
+     * @param \Elceka\LaravelCalendar\Event $event
      * @param array                            $customAttributes
      *
      * @return void
@@ -52,7 +52,7 @@ class EventCollection
     }
 
     /**
-     * @param \Acaronlex\LaravelCalendar\Event $event
+     * @param \Elceka\LaravelCalendar\Event $event
      * @param array                            $customAttributes
      *
      * @return array
@@ -73,7 +73,7 @@ class EventCollection
     }
 
     /**
-     * @param \Acaronlex\LaravelCalendar\Event $event
+     * @param \Elceka\LaravelCalendar\Event $event
      *
      * @return int|string|null
      */

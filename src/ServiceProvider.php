@@ -1,13 +1,13 @@
 <?php
 
-namespace Acaronlex\LaravelCalendar;
+namespace Elceka\LaravelCalendar;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 /**
  * Class ServiceProvider
  *
- * @package Acaronlex\LaravelCalendar
+ * @package Elceka\LaravelCalendar
  */
 class ServiceProvider extends BaseServiceProvider
 {
@@ -19,7 +19,7 @@ class ServiceProvider extends BaseServiceProvider
     public function register(): void
     {
         $this->app->bind('laravel-calendar', function ($app) {
-            return $app->make('Acaronlex\LaravelCalendar\Calendar');
+            return $app->make(Calendar::class);
         });
     }
 

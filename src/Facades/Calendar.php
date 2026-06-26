@@ -1,13 +1,13 @@
 <?php
 
-namespace Acaronlex\LaravelCalendar\Facades;
+namespace Elceka\LaravelCalendar\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * Class Calendar
  *
- * @package Acaronlex\LaravelCalendar\Facades
+ * @package Elceka\LaravelCalendar\Facades
  */
 class Calendar extends Facade
 {
